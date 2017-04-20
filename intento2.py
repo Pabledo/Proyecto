@@ -131,7 +131,7 @@ def main():
         sprite()
         #llamar a la funcion teclado con
         teclado()
-        #cambiarle el tamaño de la imagen    
+        #cambiarle el tamaÃ±o de la imagen    
         fondo = pygame.transform.scale(fondo, (1000, 400))
         #descarga = pygame.transform.scale(descarga,(100,100))
         
@@ -150,7 +150,9 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-   
+            elif event.type == pygame.KEYDOWN:
+                    if event.key == K_ESCAPE:
+                            sys.exit(0)
     return 0
  
 if __name__ == '__main__':
