@@ -161,8 +161,11 @@ def main():
         
         # Posibles entradas del teclado y mouse
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
+            if event.type == KEYDOWN:
+                key = pygame.key.name(event.key)
+                if key == "q":
+                    pygame.quit()
+                    sys.exit()
    
     return 0
  
