@@ -163,7 +163,7 @@ def main():
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 key = pygame.key.name(event.key)
-                if key == "q":
+                if key == "1":
                     pygame.quit()
                     sys.exit()
    
