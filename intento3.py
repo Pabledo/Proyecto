@@ -56,27 +56,39 @@ def teclado():
        
 
     return
+    
+
 #===========================================================
 #=================SPRITE====================================
 def sprite(): #momentaneamente fuera de servicio
               #esto lo que hace es ver los sprites de la imagen y hacer que cambien
     global cont
     
-    xixf[0]=(0,0,20,45)
-    xixf[1]=(0,0,0,0)
-    xixf[2]=(0,0,0,0)
-    xixf[3]=(0,0,0,0)
-    xixf[4]=(0,0,0,0)
-    xixf[5]=(0,0,0,0)
-
-    Rxixf[0]=(0,0,20,45)
-    Rxixf[1]=(0,0,0,0)
-    Rxixf[2]=(0,0,0,0)
-    Rxixf[3]=(0,0,0,0)
-    Rxixf[4]=(0,0,0,0)
-    Rxixf[5]=(0,0,0,0)
+    xixf[0]=(12,12,35,55)
+    xixf[1]=(53,10,34,45)
+    xixf[2]=(97,10,32,50)
+    xixf[3]=(146,5,28,45)
+    xixf[4]=(178,8,25,45)
+    xixf[5]=(208,8,28,49)
+    xixf[6]=(240,9,37,49)
+    xixf[7]=(281,9,32,48)
+    xixf[8]=(322,10,25,45)
+    xixf[9]=(354,9,24,48)
+    xixf[10]=(384,10,31,49)
+        
+    Rxixf[0]=(386,9,27,47)
+    Rxixf[1]=(325,8,43,49)
+    Rxixf[2]=(290,7,34,46)
+    Rxixf[3]=(252,6,24,46)
+    Rxixf[4]=(218,7,25,48)
+    Rxixf[5]=(184,8,29,49)
+    Rxixf[6]=(144,8,37,49)
+    Rxixf[7]=(109,9,32,48)
+    Rxixf[8]=(74,11,25,46)
+    Rxixf[9]=(44,9,24,48)
+    Rxixf[10]=(7,11,32,49)
     
-    P=6
+    p=6
 
     global i
 
@@ -92,8 +104,17 @@ def sprite(): #momentaneamente fuera de servicio
         i=4
     if cont == p*6:
         i=5
+    if cont == p*7:
+        i=6
+    if cont == p*8:
+        i=7
+    if cont == p*9:
+        i=8
+    if cont == p*10:
+        i=9
         cont=0
     return
+
 #================================================================
  
 def main():
@@ -105,20 +126,23 @@ def main():
    
     #fondo = imagen("C:\Users\Gustavo\Desktop\proyecto/fondo.png")      
     #descarga = imagen("C:\Users\Gustavo\Desktop\proyecto/prota0.png",True)
-    fondo = imagen("/home/pi/Desktop/proyecto Machine Entertainment/fondo.png")      
-    descarga = imagen("/home/pi/Desktop/proyecto Machine Entertainment/prota0.png",True)
+    fondo = imagen("C:\Users\Gabriel\Documents\Universidad\Proyecto 2\proyecto/fondo.png")      
+    descarga = imagen("C:\Users\Gabriel\Documents\Universidad\Proyecto 2\proyecto/sprite2.png",True)
     descargainv = pygame.transform.flip(descarga,True,False); # da vuelta el Sprite
+    pygame.mixer.music.load("C:\Users\Gabriel\Documents\Universidad\Proyecto 2/musica.mp3")
     #con el true estamos diciendo que si hay transpariencia, osea se la quitamos
 
-    clock=pygame.time.Clock()     
- 
+    clock=pygame.time.Clock()
+
+    pygame.mixer.music.play(-1, 0.0)
  
     # el bucle principal del juego
     while True:
         time=clock.tick(60)
+        sprite()
         #llamar a la funcion teclado con
         teclado()
-        #cambiarle el tamaño de la imagen    
+        #cambiarle el tamaÃ±o de la imagen    
         fondo = pygame.transform.scale(fondo, (1000, 400))
         #descarga = pygame.transform.scale(descarga,(100,100))
         
@@ -128,9 +152,10 @@ def main():
         #empieza a dibujar la imagen con condiciones, que ayuda a indicar
         #inquierza y derecha 
         if direc==False :
-            pantalla.blit(descarga, ( SposX, SposY))
+            pantalla.blit(descarga,  (SposX, SposY), (xixf[i]))
+
         if direc == True:
-            pantalla.blit(descargainv, ( SposX, SposY))
+            pantalla.blit(descargainv,  (SposX, SposY), (Rxixf[i]))
 
         pygame.display.flip()
         
@@ -142,8 +167,7 @@ def main():
     return 0
  
 if __name__ == '__main__':
-    main()
-
+    main
 
     
     
