@@ -23,27 +23,25 @@ def draw_text(text, font, surface, x, y, main_color, background_color=None):
 
 
 def start_screen():
-    pygame.mouse.set_cursor(*pygame.cursors.diamond)
+    #pygame.mouse.set_cursor(*pygame.cursors.diamond)
     while True:
         title_font = pygame.font.Font('freesansbold.ttf', 65)
         big_font = pygame.font.Font(None, 36)
+        #pantalla= pygame.image.load('C:\Users\Gustavo\Desktop\menu1/ctm.png')
         draw_text('ESQUIZOFRENIA', title_font, screen,
                   700 / 2, 600 / 3, (0, 255, 0), (255, 255, 12))
       #  draw_text('pulse una teecla del raton para comnzar', big_font, screen,
                 #  700 / 2, 600/ 2,(0, 255, 0), (0,0,0))
-        draw_text('COMENZAR',
+        draw_text('PULSE C PARA COMENZAR',
                   default_font, screen, 700/ 2, 600 / 1.7, (0, 255, 0), (0,0,0))
-        draw_text('SALIR', default_font, screen,
+        draw_text('PUELSE S PARA SALIR', default_font, screen,
                   700 / 2, 600/ 1.1, (0, 255, 0), (0,0,0))
         pygame.display.update()
         for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                 main()
-                
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_s:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_c:
                      main()
-                    
+                     return
             if event.type == QUIT:
                 return
 #===========================================================
@@ -216,3 +214,4 @@ def main():
 
 start_screen()
 pygame.quit()
+
