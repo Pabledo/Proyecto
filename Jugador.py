@@ -8,9 +8,9 @@ class player:
     def __init__(self):
         self.x = 200
         self.y = 300
-        self.initialAnimSpeed = 10
+        self.initialAnimSpeed = 7
         self.currentAnimSpeed = self.initialAnimSpeed
-        self.anim = glob.glob('sprite*.png')
+        self.anim = glob.glob('Personaje\sprite*.png')
         self.anim.sort()
         self.animPosition=0
         self.aniMax = len(self.anim) -1
@@ -24,7 +24,7 @@ class player:
             if pos==1:
                 self.currentAnimSpeed -=1
                 self.x += 1
-            if pos==2:
+            if pos==-1:
                 self.currentAnimSpeed -=1
                 self.x -= 1
             
@@ -44,8 +44,6 @@ class player:
 
 pygame.init()
 screen=pygame.display.set_mode((w,h))
-##pygame.mixer.music.load('maintheme.ogg')
-#pygame.mixer.music.play(-1,0.0)
 clock=pygame.time.Clock()
 
 player1 = player()
@@ -60,7 +58,7 @@ while 1:
         elif event.type == KEYDOWN and ( event.key == K_RIGHT):
             position = 1
         elif event.type == KEYDOWN and (event.key == K_LEFT):
-            position = 2
+            position = -1
         elif event.type == KEYUP and (event.key == K_RIGHT or event.key == K_LEFT):
             position = 0
     player1.update(position)
