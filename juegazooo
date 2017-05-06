@@ -2,17 +2,23 @@
 # -*- coding: utf-8 -*-
 from pygame.locals import *
 import pygame
-
+from msvcrt import getch
 #from global_constants import *
 
 pygame.init()
-# Display
-screen = pygame.display.set_mode((700, 600))
-# Window titlebar
+screen = pygame.display.set_mode((800, 630))
 pygame.display.set_caption('JUEGAZO')
-pygame.display.set_icon(pygame.image.load('C:\Users\Gustavo\Desktop\menu1/ctm.png'))
-
 default_font = pygame.font.Font(None, 28)
+
+def imagen(filename, transparent=False):
+        try: image = pygame.image.load(filename)
+        except pygame.error, message:
+                raise SystemExit, message
+        image = image.convert()       
+        if transparent:
+                color = image.get_at((0,0))
+                image.set_colorkey(color, RLEACCEL)
+        return image
 
 def draw_text(text, font, surface, x, y, main_color, background_color=None):
     textobj = font.render(text, True, main_color, background_color)
@@ -23,25 +29,31 @@ def draw_text(text, font, surface, x, y, main_color, background_color=None):
 
 
 def start_screen():
-    #pygame.mouse.set_cursor(*pygame.cursors.diamond)
+    
+    pantalla=imagen('C:\Users\Gustavo\Desktop\menu1/wea.png')
     while True:
+        pantalla = pygame.transform.scale(pantalla, (800, 630))
+        screen.blit(pantalla, (0, 0))
         title_font = pygame.font.Font('freesansbold.ttf', 65)
-        big_font = pygame.font.Font(None, 36)
-        #pantalla= pygame.image.load('C:\Users\Gustavo\Desktop\menu1/ctm.png')
+        big_font = pygame.font.Font(None, 36) 
         draw_text('ESQUIZOFRENIA', title_font, screen,
-                  700 / 2, 600 / 3, (0, 255, 0), (255, 255, 12))
-      #  draw_text('pulse una teecla del raton para comnzar', big_font, screen,
-                #  700 / 2, 600/ 2,(0, 255, 0), (0,0,0))
+                  800 / 2, 630 / 3, (0, 255, 0), ((0, 0, 0),True))
         draw_text('PULSE C PARA COMENZAR',
-                  default_font, screen, 700/ 2, 600 / 1.7, (0, 255, 0), (0,0,0))
+                  default_font, screen, 800/ 2, 630 / 1.7, (0, 255, 0),((0, 0, 0),True))
         draw_text('PUELSE S PARA SALIR', default_font, screen,
-                  700 / 2, 600/ 1.1, (0, 255, 0), (0,0,0))
+                  800 / 2, 630/ 1.1, (0, 255, 0), ((0, 0, 0),True))
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_c:
                      main()
                      return
+                if event.key == pygame.K_s:
+                    key = pygame.key.name(event.key)
+                    if key == "s":
+                        pygame.quit()
+                        quit()
+                   
             if event.type == QUIT:
                 return
 #===========================================================
@@ -49,8 +61,8 @@ def start_screen():
 #===========================================================
 
 
-WIDTH = 1000
-HEIGHT = 500
+WIDTH = 800
+HEIGHT = 630
 #sposx= S del nombre del wn y posx= 100 es donde empezara en X
 SposX=100
 SposY=299
@@ -101,7 +113,9 @@ def teclado():
        
 
     return
-    
+def salir():
+    k=msvcrt.getch()
+    return k    
 
 #===========================================================
 #=================SPRITE====================================
@@ -167,13 +181,11 @@ def main():
     pantalla = pygame.display.set_mode((WIDTH, HEIGHT))
     #nombre de la pantalla
     pygame.display.set_caption("juegazo")
- 
-   
     #fondo = imagen("C:\Users\Gustavo\Desktop\proyecto/fondo.png")      
     #descarga = imagen("C:\Users\Gustavo\Desktop\proyecto/prota0.png",True)
     fondo = imagen("C:\Users\Gustavo\Desktop\proyecto/fondo.png")      
     descarga = imagen("C:\Users\Gustavo\Desktop\proyecto/sprite2.png",True)
-    descargainv = pygame.transform.flip(descarga,True,False); # da vuelta el Sprite
+    descargainv = pygame.transform.flip(descarga,True,False) # da vuelta el Sprite
     pygame.mixer.music.load("C:\Users\Gustavo\Desktop\proyecto/musica.mp3")
     #con el true estamos diciendo que si hay transpariencia, osea se la quitamos
 
@@ -188,7 +200,7 @@ def main():
         #llamar a la funcion teclado con
         teclado()
         #cambiarle el tamaño de la imagen    
-        fondo = pygame.transform.scale(fondo, (1000, 400))
+        fondo = pygame.transform.scale(fondo, (800, 630))
         #descarga = pygame.transform.scale(descarga,(100,100))
         
         # es para que empiece a dibujar de la posicion 0,0   
@@ -206,6 +218,9 @@ def main():
         
         # Posibles entradas del teclado y mouse
         for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    start_screen()
             if event.type == pygame.QUIT:
                 sys.exit()
    
@@ -214,4 +229,3 @@ def main():
 
 start_screen()
 pygame.quit()
-
