@@ -30,7 +30,9 @@ def draw_text(text, font, surface, x, y, main_color, background_color=None):
 #========================Menu======================================
 
 def start_screen():
-    
+        
+    pygame.mixer.music.load("delusion.ogg")
+    pygame.mixer.music.play(-1, 0.0)
     pantalla=imagen('C:\Users\Gabriel\Documents\Universidad\Segundo año\Primer semestre\Proyecto introduccion a la ingenieria  II\Schisophrenia Post Crysis\menu\menu1/fondo_pixel.png')
     while True:
         pantalla = pygame.transform.scale(pantalla, (800, 700))
